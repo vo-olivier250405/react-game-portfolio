@@ -1,20 +1,15 @@
 import "./styles/App.css";
 import { useState } from "react";
-import { Button } from "./components/atoms";
+import { Home, Game } from "./components/organisms";
 
 export const App = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const handleOnClick = () => {
+    setIsPlaying(!isPlaying);
+  };
+
   if (isPlaying) {
-    return (
-      <div>
-        Hello
-        <Button text="Sortons" onClick={() => setIsPlaying(!isPlaying)} />
-      </div>
-    );
+    return <Game buttonFunction={handleOnClick} />;
   }
-  return (
-    <div>
-      <Button text="Jouons" onClick={() => setIsPlaying(!isPlaying)} />
-    </div>
-  );
+  return <Home buttonFunction={handleOnClick} />;
 };
