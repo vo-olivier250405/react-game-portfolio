@@ -45,8 +45,17 @@ section{
 
 .buttons{
   margin: auto;
+  border: 2px solid #12ffeb;
+  border-radius: 10px;
+  background-color: #07746a;
+  color: aliceblue;
+  padding: 2rem;
+  font-size: 1.2vw;
 }
 
+.buttons:hover{
+  background-color: #05524a;
+}
 span{
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px #000;

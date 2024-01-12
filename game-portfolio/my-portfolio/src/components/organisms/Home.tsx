@@ -10,7 +10,7 @@ export const Home = (props: homeProps) => {
         <h1>
           Hi, I'm <span>Vo Olivier</span>, Etna student !
         </h1>
-        <Button text="Jouons" onClick={props.buttonFunction}></Button>
+        <Button text="Get started !" onClick={props.buttonFunction}></Button>
       </div>
       <div className="character"></div>
     </section>
