@@ -1,5 +1,5 @@
 import "./style.css";
-import { Player } from "./class";
+import { Player } from "./classes";
 
 const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
 
