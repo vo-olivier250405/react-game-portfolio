@@ -6,7 +6,7 @@ type gameProps = {
 
 export const Game = (props: gameProps) => {
   return (
-    <section className="home">
+    <section className="game">
       <div className="name">Nous commencons</div>
       <div className="character"></div>
       <Button text="Sortons" onClick={props.buttonFunction}></Button>

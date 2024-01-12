@@ -6,9 +6,13 @@ type homeProps = {
 export const Home = (props: homeProps) => {
   return (
     <section className="home">
-      <div className="name">Hi, I'm VO OLIVIER !</div>
+      <div className="name">
+        <h1>
+          Hi, I'm <span>Vo Olivier</span>, Etna student !
+        </h1>
+        <Button text="Jouons" onClick={props.buttonFunction}></Button>
+      </div>
       <div className="character"></div>
-      <Button text="Jouons" onClick={props.buttonFunction}></Button>
     </section>
   );
 };

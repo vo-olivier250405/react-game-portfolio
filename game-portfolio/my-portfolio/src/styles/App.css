@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200&family=Pixelify+Sans:wght@400..700&display=swap');
+
+
+*{
+  font-family: 'Pixelify Sans';
+  font-size: medium;
+}
+
 html, body{
   margin: 0;
   padding: 0;
@@ -8,4 +16,38 @@ html, body{
 canvas{
   width: 100%;
   background: blue;
+}
+
+
+section{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 1px solid #333;
+  transition: all 0.3s;
+  box-sizing: content-box !important;
+}
+
+.home{
+  background-image: url("../assets/lobby-back-ground.png");
+}
+
+.name h1, span{
+  font-size: 4vw;
+}
+.name{
+  display: grid;
+  justify-content: center;
+}
+
+.buttons{
+  margin: auto;
+}
+
+span{
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px #000;
 }
