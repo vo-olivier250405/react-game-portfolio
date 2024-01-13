@@ -45,6 +45,7 @@ export class Player {
 
   update(canvas: HTMLCanvasElement): void {
     // this.applyGravity(canvas);
+    canvas;
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
   }
