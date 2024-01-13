@@ -12,7 +12,7 @@ canvas.height = 64 * 9;
 const player = new Player();
 
 // animation loop
-export const animatePlayer = () => {
+export const animatePlayer = (): void => {
   /**Redraw player rect infinitely */
   window.requestAnimationFrame(animatePlayer);
 
@@ -26,3 +26,31 @@ export const animatePlayer = () => {
 };
 
 animatePlayer();
+
+window.addEventListener("keydown", (event: KeyboardEvent): void => {
+  switch (event.key) {
+    case "z":
+      // if (player.velocity.y === 0) player.velocity.y = -20;
+      player.velocity.y = -4;
+      break;
+    case "q":
+      player.velocity.x = -4;
+      break;
+    case "d":
+      player.velocity.x = 4;
+      break;
+    case "s":
+      player.velocity.y = 4;
+      break;
+  }
+});
+
+window.addEventListener("keyup", (event: KeyboardEvent): void => {
+  if (event.key) {
+    if (["z", "s"].includes(event.key)) {
+      player.velocity.y = 0;
+    } else if (["q", "d"].includes(event.key)) {
+      player.velocity.x = 0;
+    }
+  }
+});

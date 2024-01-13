@@ -3,6 +3,9 @@ export class Player {
   width: number;
   height: number;
   sides: { bottom: number };
+  velocity: { x: number; y: number };
+  gravity: number;
+  applyGravity: (canvas: HTMLCanvasElement) => void;
 
   constructor() {
     this.position = {
@@ -12,9 +15,25 @@ export class Player {
     this.width = 100;
     this.height = 100;
     this.sides = { bottom: this.position.y + this.height };
+    this.velocity = { x: 0, y: 0 };
+    this.gravity = 1;
+
+    // gravity (optional)
+    this.applyGravity = (canvas: HTMLCanvasElement): void => {
+      // movements
+      this.position.x += this.velocity.x;
+      this.position.y += this.velocity.y;
+      this.sides.bottom = this.position.y + this.height;
+
+      // above bottom of canvas
+      if (this.sides.bottom + this.velocity.y < canvas.height) {
+        this.velocity.y += this.gravity;
+        this.sides.bottom = this.position.y + this.height;
+      } else this.velocity.y = 0;
+    };
   }
 
-  draw(canvaSurface: CanvasRenderingContext2D) {
+  draw(canvaSurface: CanvasRenderingContext2D): void {
     canvaSurface.fillStyle = "blue";
     canvaSurface.fillRect(
       this.position.x,
@@ -24,10 +43,9 @@ export class Player {
     );
   }
 
-  update(canvas: HTMLCanvasElement) {
-    if (this.sides.bottom < canvas.height) {
-      this.position.y++;
-      this.sides.bottom = this.position.y + this.height;
-    }
+  update(canvas: HTMLCanvasElement): void {
+    // this.applyGravity(canvas);
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
   }
 }
