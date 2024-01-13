@@ -1,2 +1,3 @@
 import { Player } from "./Player";
-export { Player };
+import { Sprite } from "./Sprite";
+export { Player, Sprite };

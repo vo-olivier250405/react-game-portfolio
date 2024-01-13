@@ -1,5 +1,5 @@
 import "./style.css";
-import { Player } from "./classes";
+import { Player, Sprite } from "./classes";
 import { IKeys } from "./types";
 import { keydownEventListener, keyupEvenetListener } from "./scripts";
 
@@ -9,6 +9,12 @@ const canvasSurface: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
 canvas.width = 64 * 64;
 canvas.height = 64 * 9;
+
+// init the background
+const background = new Sprite({
+  position: { x: 0, y: 0 },
+  path: "src/assets/img/backgroundLevel1.png",
+});
 
 // init a player
 const player = new Player();
@@ -27,8 +33,7 @@ export const animatePlayer = (): void => {
   window.requestAnimationFrame(animatePlayer);
 
   // background
-  canvasSurface.fillStyle = "red";
-  canvasSurface.fillRect(0, 0, canvas.width, canvas.height);
+  background.draw(canvasSurface);
 
   // player's movements
   player.velocity = { x: 0, y: 0 };
