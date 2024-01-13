@@ -1,5 +1,7 @@
 import "./style.css";
 import { Player } from "./classes";
+import { IKeys } from "./types";
+import { keydownEventListener, keyupEvenetListener } from "./scripts";
 
 const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
 
@@ -11,6 +13,14 @@ canvas.height = 64 * 9;
 // init a player
 const player = new Player();
 
+// keys
+const KEYS: IKeys = {
+  z: { isPressed: false },
+  s: { isPressed: false },
+  d: { isPressed: false },
+  q: { isPressed: false },
+};
+
 // animation loop
 export const animatePlayer = (): void => {
   /**Redraw player rect infinitely */
@@ -20,6 +30,18 @@ export const animatePlayer = (): void => {
   canvasSurface.fillStyle = "red";
   canvasSurface.fillRect(0, 0, canvas.width, canvas.height);
 
+  // player's movements
+  player.velocity = { x: 0, y: 0 };
+  if (KEYS.z.isPressed) {
+    player.velocity.y = -4;
+  } else if (KEYS.s.isPressed) {
+    player.velocity.y = 4;
+  } else if (KEYS.d.isPressed) {
+    player.velocity.x = 4;
+  } else if (KEYS.q.isPressed) {
+    player.velocity.x = -4;
+  }
+
   // player
   player.draw(canvasSurface);
   player.update(canvas);
@@ -27,30 +49,5 @@ export const animatePlayer = (): void => {
 
 animatePlayer();
 
-window.addEventListener("keydown", (event: KeyboardEvent): void => {
-  switch (event.key) {
-    case "z":
-      // if (player.velocity.y === 0) player.velocity.y = -20;
-      player.velocity.y = -4;
-      break;
-    case "q":
-      player.velocity.x = -4;
-      break;
-    case "d":
-      player.velocity.x = 4;
-      break;
-    case "s":
-      player.velocity.y = 4;
-      break;
-  }
-});
-
-window.addEventListener("keyup", (event: KeyboardEvent): void => {
-  if (event.key) {
-    if (["z", "s"].includes(event.key)) {
-      player.velocity.y = 0;
-    } else if (["q", "d"].includes(event.key)) {
-      player.velocity.x = 0;
-    }
-  }
-});
+keydownEventListener(KEYS);
+keyupEvenetListener(KEYS);
