@@ -14,9 +14,9 @@ export class Player {
     this.sides = { bottom: this.position.y + this.height };
   }
 
-  draw(canvasSurface: CanvasRenderingContext2D) {
-    canvasSurface.fillStyle = "blue";
-    canvasSurface.fillRect(
+  draw(canvaSurface: CanvasRenderingContext2D) {
+    canvaSurface.fillStyle = "blue";
+    canvaSurface.fillRect(
       this.position.x,
       this.position.y,
       this.width,
