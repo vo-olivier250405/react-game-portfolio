@@ -51,6 +51,13 @@ export class Player {
   }
 
   update(_canvas: HTMLCanvasElement): void {
+    this.checkCollisions();
+    // this.applyGravity(canvas);
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
+  }
+
+  checkCollisions() {
     // check for horizontal collision
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i];
@@ -66,21 +73,17 @@ export class Player {
         this.position.y + this.velocity.y <=
           collisionBlock.position.y + collisionBlock.height
       ) {
-        // going to the left
-        if (this.velocity.x < -1 || this.velocity.x > 1) {
+        // going to the left and right
+        if (this.velocity.x < 0 || this.velocity.x > 0) {
           this.position.x -= this.velocity.x;
           break;
         }
-        // going to the left
-        if (this.velocity.y < -1 || this.velocity.y > 1) {
+        // going bottom and up
+        if (this.velocity.y < 0 || this.velocity.y > 0) {
           this.position.y -= this.velocity.y;
           break;
         }
       }
     }
-
-    // this.applyGravity(canvas);
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
   }
 }
