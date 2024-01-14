@@ -21,7 +21,9 @@ const background = new Sprite({
 });
 
 // init a player
-const player = new Player();
+const player = new Player({
+  collisionBlocks,
+});
 
 // keys
 const KEYS: IKeys = {
