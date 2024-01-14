@@ -67,3 +67,9 @@ export const animatePlayer = (): void => {
 animatePlayer();
 keydownEventListener(KEYS);
 keyupEvenetListener(KEYS);
+
+console.log(
+  "%cGet out and enjoy my game, sneaky developpers.",
+  "background: #222; color: #bada55"
+);
+console.log("\n%c— Olivier", "color: grey");
