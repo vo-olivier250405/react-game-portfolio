@@ -14,7 +14,7 @@ export class CollisionBlock {
   }
 
   draw(canvaSurface: CanvasRenderingContext2D) {
-    canvaSurface.fillStyle = "red";
+    canvaSurface.fillStyle = "rgb(255, 0, 0, 0.5)";
     canvaSurface.fillRect(
       this.position.x,
       this.position.y,

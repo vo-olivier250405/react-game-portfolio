@@ -9,8 +9,8 @@ export class Player {
 
   constructor() {
     this.position = {
-      x: 100,
-      y: 100,
+      x: 300,
+      y: 240,
     };
     this.width = 20;
     this.height = 20;

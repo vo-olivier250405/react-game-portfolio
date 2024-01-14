@@ -59,6 +59,7 @@ export const animatePlayer = (): void => {
   // player
   player.draw(canvasSurface);
   player.update(canvas);
+  // console.log(player.position);
 };
 
 animatePlayer();
