@@ -1,7 +1,11 @@
 import "./style.css";
-import { Player, Sprite } from "./classes";
+import { Player, Sprite, CollisionBlock } from "./classes";
 import { IKeys } from "./types";
-import { keydownEventListener, keyupEvenetListener } from "./scripts";
+import {
+  keydownEventListener,
+  keyupEvenetListener,
+  collisionBlocks,
+} from "./scripts";
 
 const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
 
@@ -38,14 +42,19 @@ export const animatePlayer = (): void => {
   // player's movements
   player.velocity = { x: 0, y: 0 };
   if (KEYS.z.isPressed) {
-    player.velocity.y = -4;
+    player.velocity.y = -2;
   } else if (KEYS.s.isPressed) {
-    player.velocity.y = 4;
+    player.velocity.y = 2;
   } else if (KEYS.d.isPressed) {
-    player.velocity.x = 4;
+    player.velocity.x = 2;
   } else if (KEYS.q.isPressed) {
-    player.velocity.x = -4;
+    player.velocity.x = -2;
   }
+
+  // collisions
+  collisionBlocks.forEach((collisionBlock: CollisionBlock) => {
+    collisionBlock.draw(canvasSurface);
+  });
 
   // player
   player.draw(canvasSurface);
@@ -53,6 +62,5 @@ export const animatePlayer = (): void => {
 };
 
 animatePlayer();
-
 keydownEventListener(KEYS);
 keyupEvenetListener(KEYS);

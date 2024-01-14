@@ -1,3 +1,5 @@
 import { Player } from "./Player";
 import { Sprite } from "./Sprite";
-export { Player, Sprite };
+import { CollisionBlock } from "./ColllisionBlock";
+
+export { Player, Sprite, CollisionBlock };
