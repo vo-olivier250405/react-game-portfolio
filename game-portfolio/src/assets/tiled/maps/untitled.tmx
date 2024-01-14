@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="1">
+ <editorsettings>
+  <export target="untitled.js" format="js"/>
+ </editorsettings>
  <tileset firstgid="1" source="pixel-cyberpunk-interior.tsx"/>
  <tileset firstgid="925" source="collision.tsx"/>
  <layer id="1" name="floor" width="32" height="20">
@@ -170,7 +173,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="9" name="Collisions" width="32" height="20" opacity="0.7">
+ <layer id="9" name="Collisions" width="32" height="20" opacity="0">
   <data encoding="csv">
 926,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,925,
 926,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,929,

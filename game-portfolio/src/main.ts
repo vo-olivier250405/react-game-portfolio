@@ -13,7 +13,7 @@ canvas.height = 64 * 9;
 // init the background
 const background = new Sprite({
   position: { x: 0, y: 0 },
-  path: "src/assets/img/backgroundLevel1.png",
+  path: "src/assets/img/background-cyber.png",
 });
 
 // init a player
