@@ -17,18 +17,20 @@ canvas.height = 64 * 9;
 // init the background
 const background = new Sprite({
   position: { x: 0, y: 0 },
-  path: "src/assets/tiled/maps/map2.png",
-  width: 512,
-  height: 320,
+  path: "src/assets/tiled/maps/background_home.png",
+  width: 1024,
+  height: 640,
+  frameRate: 1,
 });
 
 // init a player
 const player = new Player({
   collisionBlocks,
-  path: "src/assets/img/hero/idle_bottom.png",
-  position: { x: 300, y: 200 },
-  width: 30,
-  height: 35,
+  path: "src/assets/img/hero/walk_bottom.png",
+  position: { x: 200, y: 300 },
+  width: 160,
+  height: 60,
+  frameRate: 3.7,
 });
 
 // keys
@@ -66,7 +68,7 @@ export const animatePlayer = (): void => {
 
   // player
   player.draw(canvasSurface);
-  player.update(canvas);
+  player.update(canvas, canvasSurface);
   // console.log(player.position);
 };
 

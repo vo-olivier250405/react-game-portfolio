@@ -6,6 +6,7 @@ type PlayerProps = {
   position: { x: number; y: number };
   width: number;
   height: number;
+  frameRate: number;
 };
 
 export class Player extends Sprite {
@@ -24,6 +25,7 @@ export class Player extends Sprite {
       position: props.position,
       width: props.width,
       height: props.height,
+      frameRate: props.frameRate,
     });
     this.position = props.position;
     this.width = props.width;
@@ -58,7 +60,17 @@ export class Player extends Sprite {
   //   );
   // }
 
-  update(_canvas: HTMLCanvasElement): void {
+  update(
+    _canvas: HTMLCanvasElement,
+    canvasSurface: CanvasRenderingContext2D
+  ): void {
+    canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
+    canvasSurface.fillRect(
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
     this.checkCollisions();
     // this.applyGravity(canvas);
     this.position.x += this.velocity.x;

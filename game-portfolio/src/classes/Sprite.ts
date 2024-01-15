@@ -3,6 +3,7 @@ type ISprite = {
   path: string;
   width: number;
   height: number;
+  frameRate: number;
 };
 
 const playerSheetToResize: string[] = [
@@ -18,29 +19,78 @@ export class Sprite {
   loaded: boolean;
   width: number;
   height: number;
+  frameRate: number;
+  currentFrame: number;
+  elapsedFrame;
+  frameBuffer;
 
   constructor(props: ISprite) {
     this.position = props.position;
-    this.width = props.width;
-    this.height = props.height;
     this.image = new Image();
     this.image.src = props.path;
+
+    this.frameRate = props.frameRate;
+    this.width = this.image.width / this.frameRate;
+    this.height = this.image.height;
+    this.currentFrame = 0;
+
     this.image.onload = () => {
       this.loaded = true;
-      if (playerSheetToResize.includes(props.path)) {
-        this.width /= 4;
+      if (props.path === "src/assets/img/hero/walk_bottom.png") {
+        this.image = this.resizeImage(this.image, props.width, props.height);
+        this.width = this.image.width / this.frameRate;
+        this.height = this.image.height;
       }
     };
     this.loaded = false;
+    this.elapsedFrame = 0;
+    this.frameBuffer = 15;
   }
   draw(canvaSurface: CanvasRenderingContext2D): void {
-    if (this.loaded)
+    if (this.loaded) {
+      const cropBox = {
+        position: { x: this.width * this.currentFrame, y: 0 },
+        width: this.width,
+        height: this.height,
+      };
       canvaSurface.drawImage(
         this.image,
+        cropBox.position.x,
+        cropBox.position.y,
+        cropBox.width,
+        cropBox.height,
         this.position.x,
         this.position.y,
         this.width,
         this.height
       );
+      this.updateFrames();
+    }
+  }
+
+  resizeImage(image: HTMLImageElement, newWidth: number, newHeight: number) {
+    // Créer un canevas temporaire
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // Définir les dimensions du canevas
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+
+    // Dessiner l'image redimensionnée sur le canevas
+    ctx!.drawImage(image, 0, 0, newWidth, newHeight);
+
+    // Créer une nouvelle image avec les dimensions modifiées
+    const resizedImage = new Image();
+    resizedImage.src = canvas.toDataURL("image/png"); // Vous pouvez ajuster le format selon vos besoins
+
+    return resizedImage;
+  }
+  updateFrames() {
+    this.elapsedFrame++;
+    if (this.elapsedFrame % this.frameBuffer === 0) {
+      if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
+      else this.currentFrame = 0;
+    }
   }
 }
