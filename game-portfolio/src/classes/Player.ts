@@ -1,9 +1,14 @@
-import { CollisionBlock } from ".";
+import { CollisionBlock, Sprite } from ".";
 
 type PlayerProps = {
   collisionBlocks: CollisionBlock[];
+  path: string;
+  position: { x: number; y: number };
+  width: number;
+  height: number;
 };
-export class Player {
+
+export class Player extends Sprite {
   position: { x: number; y: number };
   width: number;
   height: number;
@@ -14,12 +19,15 @@ export class Player {
   applyGravity: (canvas: HTMLCanvasElement) => void;
 
   constructor(props: PlayerProps) {
-    this.position = {
-      x: 300,
-      y: 240,
-    };
-    this.width = 16;
-    this.height = 16;
+    super({
+      path: props.path,
+      position: props.position,
+      width: props.width,
+      height: props.height,
+    });
+    this.position = props.position;
+    this.width = props.width;
+    this.height = props.height;
     this.sides = { bottom: this.position.y + this.height };
     this.velocity = { x: 0, y: 0 };
     this.gravity = 1;
@@ -40,15 +48,15 @@ export class Player {
     };
   }
 
-  draw(canvaSurface: CanvasRenderingContext2D): void {
-    canvaSurface.fillStyle = "blue";
-    canvaSurface.fillRect(
-      this.position.x,
-      this.position.y,
-      this.width,
-      this.height
-    );
-  }
+  // draw(canvaSurface: CanvasRenderingContext2D): void {
+  //   canvaSurface.fillStyle = "blue";
+  //   canvaSurface.fillRect(
+  //     this.position.x,
+  //     this.position.y,
+  //     this.width,
+  //     this.height
+  //   );
+  // }
 
   update(_canvas: HTMLCanvasElement): void {
     this.checkCollisions();
