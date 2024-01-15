@@ -17,7 +17,7 @@ canvas.height = 64 * 9;
 // init the background
 const background = new Sprite({
   position: { x: 0, y: 0 },
-  path: "src/assets/img/background-cyber.png",
+  path: "src/assets/tiled/maps/map2.png",
   width: 512,
   height: 320,
 });
@@ -26,9 +26,9 @@ const background = new Sprite({
 const player = new Player({
   collisionBlocks,
   path: "src/assets/img/hero/idle_bottom.png",
-  position: { x: 340, y: 200 },
+  position: { x: 300, y: 200 },
   width: 30,
-  height: 30,
+  height: 35,
 });
 
 // keys

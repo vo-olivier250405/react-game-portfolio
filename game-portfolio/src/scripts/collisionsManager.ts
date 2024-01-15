@@ -6,7 +6,7 @@ export const collisionBlocks: CollisionBlock[] = [];
 const createObjectsFrom2DArray = (datas: number[][]) => {
   datas.forEach((row: number[], y: number) => {
     row.forEach((symbol: number, x) => {
-      if (symbol >= 900 && symbol <= 1000) {
+      if (symbol === 925) {
         // collisions
         collisionBlocks.push(
           new CollisionBlock({

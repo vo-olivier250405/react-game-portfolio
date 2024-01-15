@@ -5,6 +5,13 @@ type ISprite = {
   height: number;
 };
 
+const playerSheetToResize: string[] = [
+  "src/assets/img/hero/walk_right.png",
+  "src/assets/img/hero/walk_left.png",
+  "src/assets/img/hero/walk_bottom.png",
+  "src/assets/img/hero/walk_up.png",
+];
+
 export class Sprite {
   image: HTMLImageElement;
   position: { x: number; y: number };
@@ -20,6 +27,9 @@ export class Sprite {
     this.image.src = props.path;
     this.image.onload = () => {
       this.loaded = true;
+      if (playerSheetToResize.includes(props.path)) {
+        this.width /= 4;
+      }
     };
     this.loaded = false;
   }
