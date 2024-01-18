@@ -5,6 +5,7 @@ import {
   keydownEventListener,
   keyupEvenetListener,
   collisionBlocks,
+  cameraTracking,
 } from "./scripts";
 
 const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
@@ -17,20 +18,27 @@ canvas.height = 64 * 9;
 // init the background
 const background = new Sprite({
   position: { x: 0, y: 0 },
-  path: "src/assets/tiled/maps/background_home.png",
+  path: "src/assets/maps/background.png",
   width: 1024,
   height: 640,
   frameRate: 1,
 });
 
+const allPlayersSheet: { [key: string]: string } = {
+  walk_left: "src/assets/img/hero/walk_left.png",
+  walk_right: "src/assets/img/hero/walk_right.png",
+  walk_up: "src/assets/img/hero/walk_up.png",
+  walk_bottom: "src/assets/img/hero/walk_bottom.png",
+};
+
 // init a player
 const player = new Player({
   collisionBlocks,
-  path: "src/assets/img/hero/walk_bottom.png",
-  position: { x: 200, y: 300 },
-  width: 160,
+  path: allPlayersSheet.walk_bottom,
+  position: { x: 482, y: 322 },
+  width: 120,
   height: 60,
-  frameRate: 3.7,
+  frameRate: 3.9,
 });
 
 // keys
@@ -69,15 +77,12 @@ export const animatePlayer = (): void => {
   // player
   player.draw(canvasSurface);
   player.update(canvas, canvasSurface);
+  cameraTracking(canvas, player);
   // console.log(player.position);
 };
 
 animatePlayer();
 keydownEventListener(KEYS);
 keyupEvenetListener(KEYS);
-
-console.log(
-  "%cGet out and enjoy my game, sneaky developpers.",
-  "background: #222; color: #bada55"
-);
+console.log("%cGet out and enjoy my game.", "background: #222; color: #bada55");
 console.log("\n%c— Olivier", "color: grey");

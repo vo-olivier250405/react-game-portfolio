@@ -21,8 +21,8 @@ export class Sprite {
   height: number;
   frameRate: number;
   currentFrame: number;
-  elapsedFrame;
-  frameBuffer;
+  elapsedFrame: number;
+  frameBuffer: number;
 
   constructor(props: ISprite) {
     this.position = props.position;
@@ -36,7 +36,7 @@ export class Sprite {
 
     this.image.onload = () => {
       this.loaded = true;
-      if (props.path === "src/assets/img/hero/walk_bottom.png") {
+      if (playerSheetToResize.includes(props.path)) {
         this.image = this.resizeImage(this.image, props.width, props.height);
         this.width = this.image.width / this.frameRate;
         this.height = this.image.height;
@@ -82,7 +82,7 @@ export class Sprite {
 
     // Créer une nouvelle image avec les dimensions modifiées
     const resizedImage = new Image();
-    resizedImage.src = canvas.toDataURL("image/png"); // Vous pouvez ajuster le format selon vos besoins
+    resizedImage.src = canvas.toDataURL("image/png");
 
     return resizedImage;
   }

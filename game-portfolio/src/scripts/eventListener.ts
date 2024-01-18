@@ -1,4 +1,10 @@
+import { Player } from "../classes";
 import { IKeys } from "../types";
+
+const border: { x: number; y: number } = {
+  x: window.innerWidth / 3,
+  y: window.innerHeight / 3,
+};
 
 export const keydownEventListener = (KEYS: IKeys) => {
   window.addEventListener("keydown", (event: KeyboardEvent): void => {
@@ -38,4 +44,11 @@ export const keyupEvenetListener = (KEYS: IKeys) => {
         break;
     }
   });
+};
+
+export const cameraTracking = (canvas: HTMLCanvasElement, _player: Player) => {
+  // canvas.style.transition = "all 0.1s ease";
+  canvas.style.transform = `translate3d( ${-_player.position.x + border.x}px, ${
+    -_player.position.y + border.y
+  }px, 0 )`;
 };
