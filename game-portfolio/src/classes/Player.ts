@@ -17,6 +17,7 @@ export class Player extends Sprite {
   velocity: { x: number; y: number };
   gravity: number;
   collisionBlocks: CollisionBlock[];
+  hitbox: { position: { x: number; y: number }; width: number; height: number };
   applyGravity: (canvas: HTMLCanvasElement) => void;
 
   constructor(props: PlayerProps) {
@@ -34,6 +35,14 @@ export class Player extends Sprite {
     this.velocity = { x: 0, y: 0 };
     this.gravity = 1;
     this.collisionBlocks = props.collisionBlocks;
+    this.hitbox = {
+      position: {
+        x: this.position.x,
+        y: this.position.y,
+      },
+      width: 20,
+      height: 30,
+    };
 
     // gravity (optional)
     this.applyGravity = (canvas: HTMLCanvasElement): void => {
@@ -64,15 +73,24 @@ export class Player extends Sprite {
     _canvas: HTMLCanvasElement,
     canvasSurface: CanvasRenderingContext2D
   ): void {
-    canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
+    // canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
     canvasSurface.fillRect(
       this.position.x,
       this.position.y,
       this.width,
       this.height
     );
+    this.hitbox.position = { x: this.position.x + 5, y: this.position.y + 25 };
     this.checkCollisions();
     // this.applyGravity(canvas);
+
+    // canvasSurface.fillStyle = "rgba(255, 0, 0, 0.5)";
+    canvasSurface.fillRect(
+      this.hitbox.position.x,
+      this.hitbox.position.y,
+      this.hitbox.width,
+      this.hitbox.height
+    );
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
   }
@@ -84,13 +102,13 @@ export class Player extends Sprite {
 
       // if a collision exists
       if (
-        this.position.x + this.velocity.x <=
+        this.hitbox.position.x + this.velocity.x <=
           collisionBlock.position.x + collisionBlock.width &&
-        this.position.x + this.width + this.velocity.x >=
+        this.hitbox.position.x + this.hitbox.width + this.velocity.x >=
           collisionBlock.position.x &&
-        this.position.y + this.height + this.velocity.y >=
+        this.hitbox.position.y + this.hitbox.height + this.velocity.y >=
           collisionBlock.position.y &&
-        this.position.y + this.velocity.y <=
+        this.hitbox.position.y + this.velocity.y <=
           collisionBlock.position.y + collisionBlock.height
       ) {
         // going to the left and right
