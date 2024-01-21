@@ -51,7 +51,7 @@ export class Player extends Sprite {
         y: this.position.y,
       },
       width: 20,
-      height: 30,
+      height: 25,
     };
     // gravity (optional)
     this.applyGravity = (canvas: HTMLCanvasElement): void => {
@@ -82,24 +82,24 @@ export class Player extends Sprite {
     _canvas: HTMLCanvasElement,
     _canvasSurface: CanvasRenderingContext2D
   ): void {
-    _canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
-    _canvasSurface.fillRect(
-      this.position.x,
-      this.position.y,
-      this.width,
-      this.height
-    );
+    // _canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
+    // _canvasSurface.fillRect(
+    //   this.position.x,
+    //   this.position.y,
+    //   this.width,
+    //   this.height
+    // );
 
     this.updateHitbox();
     this.checkCollisions();
     //this.applyGravity(canvas);
-    _canvasSurface.fillStyle = "rgba(255, 0, 0, 0.5)";
-    _canvasSurface.fillRect(
-      this.hitbox.position.x,
-      this.hitbox.position.y,
-      this.hitbox.width,
-      this.hitbox.height
-    );
+    // _canvasSurface.fillStyle = "rgba(255, 0, 0, 0.5)";
+    // _canvasSurface.fillRect(
+    //   this.hitbox.position.x,
+    //   this.hitbox.position.y,
+    //   this.hitbox.width,
+    //   this.hitbox.height
+    // );
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
   }
@@ -135,7 +135,7 @@ export class Player extends Sprite {
   }
 
   updateHitbox() {
-    this.hitbox.position = { x: this.position.x + 5, y: this.position.y + 25 };
+    this.hitbox.position = { x: this.position.x + 5, y: this.position.y + 32 };
   }
 
   switchSprite(name: string) {
