@@ -4,6 +4,14 @@ type ISprite = {
   width: number;
   height: number;
   frameRate: number;
+  animations: {
+    [key: string]: {
+      frameRate: number;
+      loop: boolean;
+      path: string;
+      image: HTMLImageElement;
+    };
+  } | null;
 };
 
 const playerSheetToResize: string[] = [
@@ -23,6 +31,14 @@ export class Sprite {
   currentFrame: number;
   elapsedFrame: number;
   frameBuffer: number;
+  animations: {
+    [key: string]: {
+      frameRate: number;
+      loop: boolean;
+      path: string;
+      image: HTMLImageElement;
+    };
+  };
 
   constructor(props: ISprite) {
     this.position = props.position;
@@ -45,7 +61,18 @@ export class Sprite {
     this.loaded = false;
     this.elapsedFrame = 0;
     this.frameBuffer = 15;
+    this.animations = props.animations!;
+
+    // change animations
+    if (this.animations) {
+      for (let key in this.animations) {
+        const newImage = new Image();
+        newImage.src = this.animations[key].path;
+        this.animations[key].image = newImage;
+      }
+    }
   }
+
   draw(canvaSurface: CanvasRenderingContext2D): void {
     if (this.loaded) {
       const cropBox = {
@@ -53,6 +80,7 @@ export class Sprite {
         width: this.width,
         height: this.height,
       };
+
       canvaSurface.drawImage(
         this.image,
         cropBox.position.x,

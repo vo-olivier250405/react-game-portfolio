@@ -7,6 +7,14 @@ type PlayerProps = {
   width: number;
   height: number;
   frameRate: number;
+  animations: {
+    [key: string]: {
+      frameRate: number;
+      loop: boolean;
+      path: string;
+      image: HTMLImageElement;
+    };
+  };
 };
 
 export class Player extends Sprite {
@@ -27,7 +35,9 @@ export class Player extends Sprite {
       width: props.width,
       height: props.height,
       frameRate: props.frameRate,
+      animations: props.animations,
     });
+
     this.position = props.position;
     this.width = props.width;
     this.height = props.height;
@@ -43,7 +53,6 @@ export class Player extends Sprite {
       width: 20,
       height: 30,
     };
-
     // gravity (optional)
     this.applyGravity = (canvas: HTMLCanvasElement): void => {
       // movements
@@ -71,21 +80,21 @@ export class Player extends Sprite {
 
   update(
     _canvas: HTMLCanvasElement,
-    canvasSurface: CanvasRenderingContext2D
+    _canvasSurface: CanvasRenderingContext2D
   ): void {
-    // canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
-    canvasSurface.fillRect(
+    _canvasSurface.fillStyle = "rgba(0, 0, 0, 0.5)";
+    _canvasSurface.fillRect(
       this.position.x,
       this.position.y,
       this.width,
       this.height
     );
-    this.hitbox.position = { x: this.position.x + 5, y: this.position.y + 25 };
-    this.checkCollisions();
-    // this.applyGravity(canvas);
 
-    // canvasSurface.fillStyle = "rgba(255, 0, 0, 0.5)";
-    canvasSurface.fillRect(
+    this.updateHitbox();
+    this.checkCollisions();
+    //this.applyGravity(canvas);
+    _canvasSurface.fillStyle = "rgba(255, 0, 0, 0.5)";
+    _canvasSurface.fillRect(
       this.hitbox.position.x,
       this.hitbox.position.y,
       this.hitbox.width,
@@ -122,6 +131,21 @@ export class Player extends Sprite {
           break;
         }
       }
+    }
+  }
+
+  updateHitbox() {
+    this.hitbox.position = { x: this.position.x + 5, y: this.position.y + 25 };
+  }
+
+  switchSprite(name: string) {
+    if (this.image !== this.animations[name].image) {
+      // this.currentFrame = 0;
+      this.image = this.resizeImage(this.animations[name].image, 120, 60);
+      if (name.includes("idle")) {
+        this.image = this.resizeImage(this.animations[name].image, 28, 60);
+      }
+      this.frameRate = this.animations[name].frameRate;
     }
   }
 }

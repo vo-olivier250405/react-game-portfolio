@@ -26,21 +26,25 @@ export const keydownEventListener = (KEYS: IKeys) => {
   });
 };
 
-export const keyupEvenetListener = (KEYS: IKeys) => {
+export const keyupEvenetListener = (KEYS: IKeys, player: Player) => {
   window.addEventListener("keyup", (event: KeyboardEvent): void => {
     switch (event.key) {
       case "z":
         // if (player.velocity.y === 0) player.velocity.y = -20;
         KEYS.z.isPressed = false;
+        player.switchSprite("idleTop");
         break;
       case "q":
         KEYS.q.isPressed = false;
+        player.switchSprite("idleLeft");
         break;
       case "d":
         KEYS.d.isPressed = false;
+        player.switchSprite("idleRight");
         break;
       case "s":
         KEYS.s.isPressed = false;
+        player.switchSprite("idleBottom");
         break;
     }
   });

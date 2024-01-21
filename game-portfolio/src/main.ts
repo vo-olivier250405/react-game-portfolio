@@ -22,6 +22,7 @@ const background = new Sprite({
   width: 1024,
   height: 640,
   frameRate: 1,
+  animations: null,
 });
 
 const allPlayersSheet: { [key: string]: string } = {
@@ -35,10 +36,60 @@ const allPlayersSheet: { [key: string]: string } = {
 const player = new Player({
   collisionBlocks,
   path: allPlayersSheet.walk_bottom,
-  position: { x: 482, y: 322 },
+  position: { x: 878, y: 440 },
   width: 120,
   height: 60,
   frameRate: 3.9,
+  animations: {
+    idleRight: {
+      frameRate: 1,
+      loop: true,
+      path: "src/assets/img/hero/idle_right.png",
+      image: new Image(),
+    },
+    idleLeft: {
+      frameRate: 1,
+      loop: true,
+      path: "src/assets/img/hero/idle_left.png",
+      image: new Image(),
+    },
+    idleTop: {
+      frameRate: 1,
+      loop: true,
+      path: "src/assets/img/hero/idle_top.png",
+      image: new Image(),
+    },
+    idleBottom: {
+      frameRate: 1,
+      loop: true,
+      path: "src/assets/img/hero/idle_bottom.png",
+      image: new Image(),
+    },
+    runRight: {
+      frameRate: 3.9,
+      loop: true,
+      path: "src/assets/img/hero/walk_right.png",
+      image: new Image(),
+    },
+    runLeft: {
+      frameRate: 3.9,
+      loop: true,
+      path: "src/assets/img/hero/walk_left.png",
+      image: new Image(),
+    },
+    runTop: {
+      frameRate: 3.9,
+      loop: true,
+      path: "src/assets/img/hero/walk_up.png",
+      image: new Image(),
+    },
+    runBottom: {
+      frameRate: 3.9,
+      loop: true,
+      path: "src/assets/img/hero/walk_bottom.png",
+      image: new Image(),
+    },
+  },
 });
 
 // keys
@@ -61,12 +112,16 @@ export const animatePlayer = (): void => {
   player.velocity = { x: 0, y: 0 };
   if (KEYS.z.isPressed) {
     player.velocity.y = -2;
+    player.switchSprite("runTop");
   } else if (KEYS.s.isPressed) {
     player.velocity.y = 2;
+    player.switchSprite("runBottom");
   } else if (KEYS.d.isPressed) {
     player.velocity.x = 2;
+    player.switchSprite("runRight");
   } else if (KEYS.q.isPressed) {
     player.velocity.x = -2;
+    player.switchSprite("runLeft");
   }
 
   // collisions
@@ -83,6 +138,6 @@ export const animatePlayer = (): void => {
 
 animatePlayer();
 keydownEventListener(KEYS);
-keyupEvenetListener(KEYS);
+keyupEvenetListener(KEYS, player);
 console.log("%cGet out and enjoy my game.", "background: #222; color: #bada55");
 console.log("\n%c— Olivier", "color: grey");
