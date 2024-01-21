@@ -165,11 +165,11 @@ export const animatePlayer = (): void => {
   player.draw(canvasSurface);
   player.update(canvas, canvasSurface);
   cameraTracking(canvas, player);
-  console.log(player.position);
+  // console.log(player.position);
 };
 
 animatePlayer();
 keydownEventListener(KEYS);
-keyupEvenetListener(KEYS, player);
+keyupEvenetListener(KEYS, player, doors);
 console.log("%cGet out and enjoy my game.", "background: #222; color: #bada55");
 console.log("\n%c— Olivier", "color: grey");
