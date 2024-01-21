@@ -25,6 +25,33 @@ const background = new Sprite({
   animations: null,
 });
 
+const doors = [
+  new Sprite({
+    position: { x: 116, y: 205 },
+    path: "src/assets/maps/doorClosen.png",
+    width: 51,
+    height: 55,
+    frameRate: 1,
+    animations: null,
+  }),
+  new Sprite({
+    position: { x: 260, y: 205 },
+    path: "src/assets/maps/doorClosen.png",
+    width: 51,
+    height: 55,
+    frameRate: 1,
+    animations: null,
+  }),
+  new Sprite({
+    position: { x: 420, y: 205 },
+    path: "src/assets/maps/doorClosen.png",
+    width: 51,
+    height: 55,
+    frameRate: 1,
+    animations: null,
+  }),
+];
+
 const allPlayersSheet: { [key: string]: string } = {
   walk_left: "src/assets/img/hero/walk_left.png",
   walk_right: "src/assets/img/hero/walk_right.png",
@@ -108,6 +135,11 @@ export const animatePlayer = (): void => {
   // background
   background.draw(canvasSurface);
 
+  // doors
+  doors.forEach((door) => {
+    door.draw(canvasSurface);
+  });
+
   // player's movements
   player.velocity = { x: 0, y: 0 };
   if (KEYS.z.isPressed) {
@@ -133,7 +165,7 @@ export const animatePlayer = (): void => {
   player.draw(canvasSurface);
   player.update(canvas, canvasSurface);
   cameraTracking(canvas, player);
-  // console.log(player.position);
+  console.log(player.position);
 };
 
 animatePlayer();
